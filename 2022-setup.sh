@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # Don't allow errors to propagate
 set -e
@@ -8,6 +9,9 @@ apt update && apt install curl gnupg2 lsb-release
 apt install ubuntu-desktop --no-install-recommends
 apt install lightdm
 
+# Install other dependencies
+apt install openssh-server
+
 # Install ROS2
 # http://docs.ros.org.ros.informatik.uni-freiburg.de/en/foxy/Installation/Ubuntu-Install-Debians.html
 curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
@@ -16,3 +20,15 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 apt update
 apt upgrade
 apt install ros-foxy-desktop
+ 
+# https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart
+# Password in sharing document
+adduser bjurobotics
+usermod -aG sudo bjurobotics
+
+cp bjurobotics.pub /home/bjurobotics/.ssh/authorized_keys
+chown bjurobotics:bjurobotics /home/bjurobotics/.ssh/authorized_keys
+chmod 600 /home/bjurobotics/.ssh/authorized_keys
+# Private key in shared files
+
+echo "Install complete. Please reboot the system."
