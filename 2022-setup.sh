@@ -3,14 +3,17 @@
 # Don't allow errors to propagate
 set -e
 
+# Stop unattended upgrades
+systemctl stop unattended-upgrades.service
+
 # Install the GUI
 # https://itsfoss.com/install-gui-ubuntu-server/
-apt update && apt install curl gnupg2 lsb-release
-apt install ubuntu-desktop --no-install-recommends
-apt install lightdm
+apt update && apt install curl gnupg2 lsb-release -y
+apt install ubuntu-desktop --no-install-recommends -y
+apt install lightdm -y
 
 # Install other dependencies
-apt install openssh-server
+apt install openssh-server -y
 
 # Install ROS2
 # http://docs.ros.org.ros.informatik.uni-freiburg.de/en/foxy/Installation/Ubuntu-Install-Debians.html
@@ -19,7 +22,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 
 apt update
 apt upgrade
-apt install ros-foxy-desktop
+apt install ros-foxy-desktop -y
  
 # https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart
 # Password in sharing document
