@@ -9,7 +9,7 @@ systemctl stop unattended-upgrades.service
 # Install the GUI
 # https://itsfoss.com/install-gui-ubuntu-server/
 apt update && apt install curl gnupg2 lsb-release -y
-apt install ubuntu-desktop --no-install-recommends -y
+# apt install ubuntu-desktop --no-install-recommends -y
 #apt install lightdm -y
 
 # Install other dependencies
